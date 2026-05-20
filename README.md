@@ -2,22 +2,16 @@
 
 Python solutions for common algorithm and data structure problems, organised by topic.
 
-## Topics Covered
-
-| Topic | Problems |
-|-------|----------|
-| Sets & Hashmaps | Two Sum, Top K Frequent, Subarray Sum |
-| Two Pointers | Palindrome, Reverse, Pair Finding |
-| Sliding Window | Max Subarray (fixed), Longest Substring (dynamic) |
-| Binary Search | Classic, Insert Position, Rotated Array, Merge Intervals |
-| Trees | Max Depth, Inorder Traversal, Same Tree, Level Order BFS |
-| Graphs | BFS, DFS, Number of Islands |
-| Stacks & Heaps | Valid Parentheses, Min Stack, Kth Largest, Top K Frequent |
-| Dynamic Programming | Climbing Stairs, House Robber, LCS, Coin Change |
-
 ## Files
 
-- [dynamic_programming.py](dynamic_programming.py) — DP patterns with space-optimised variants
+| File | Problems |
+|------|----------|
+| [arrays_strings.py](solutions/arrays_strings.py) | #217 Contains Duplicate, #1 Two Sum, #242 Valid Anagram, #49 Group Anagrams, #347 Top K Frequent, #560 Subarray Sum, #125 Valid Palindrome, #3 Longest Substring, #643 Max Average Subarray |
+| [binary_search.py](solutions/binary_search.py) | #704 Binary Search, #35 Search Insert Position, #153 Find Minimum Rotated Array, #56 Merge Intervals |
+| [trees.py](solutions/trees.py) | #104 Max Depth, #94 Inorder Traversal, #100 Same Tree, #102 Level Order Traversal |
+| [graphs.py](solutions/graphs.py) | #200 Number of Islands, Graph DFS, Graph BFS, Has Path |
+| [stacks_heaps.py](solutions/stacks_heaps.py) | #20 Valid Parentheses, #155 Min Stack, #703 Kth Largest, #347 Top K Frequent (heap) |
+| [dynamic_programming.py](solutions/dynamic_programming.py) | #70 Climbing Stairs, #198 House Robber, #1143 LCS, #322 Coin Change |
 
 ## Key Patterns
 
