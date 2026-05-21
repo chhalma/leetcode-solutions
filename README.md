@@ -12,6 +12,12 @@ Python solutions for common algorithm and data structure problems, organised by 
 | [graphs.py](solutions/graphs.py) | #200 Number of Islands, Graph DFS, Graph BFS, Has Path |
 | [stacks_heaps.py](solutions/stacks_heaps.py) | #20 Valid Parentheses, #155 Min Stack, #703 Kth Largest, #347 Top K Frequent (heap) |
 | [dynamic_programming.py](solutions/dynamic_programming.py) | #70 Climbing Stairs, #198 House Robber, #1143 LCS, #322 Coin Change |
+| [linked_lists.py](solutions/linked_lists.py) | #206 Reverse Linked List, #21 Merge Two Sorted Lists, #141 Linked List Cycle, #876 Middle of Linked List, #19 Remove Nth From End |
+| [dijkstra_graph.py](solutions/dijkstra_graph.py) | #743 Network Delay Time, #787 Cheapest Flights Within K Stops, #1631 Path With Minimum Effort |
+
+## Revision Notes
+
+- [patterns_learned.md](patterns_learned.md) — all patterns, when to use what, Python cheatsheet
 
 ## Key Patterns
 
