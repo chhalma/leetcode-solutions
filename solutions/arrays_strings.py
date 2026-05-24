@@ -90,11 +90,35 @@ nums=[1,1,1,2,2,3], k=2 → [1,2]
 
 time: O(n log k)  space: O(n)
 """
+# Solution 1
+# Time O(nlogn) space(n)
 from collections import Counter
 
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
     return [num for num, _ in Counter(nums).most_common(k)]
 
+# Solution 2
+# Time O(nlogn) space(n)
+def top_k_frequent(nums: list[int], k: int) -> list[int]:
+    freq = defaultdict(int)
+
+    for n in nums:
+        freq[n] += 1
+    sorted_freq = sorted(freq, key=lambda x: freq[x], reverse=True)
+    return sorted_freq[:k]
+
+# Solution 3
+# Time O(nlogk) space(n)
+import heapq   
+def top_k_frequent(nums: list[int], k: int) -> list[int]:
+    freq = Counter(nums)
+    heap = []
+
+    for  n, c in freq.items():
+        heapq.heappush(heap,(c,n))
+        if len(heap) > k:
+            heapq.heappop(heap)
+    return [num for count,num in heap ]
 
 """
 Exercise 6 — LeetCode #560 Subarray Sum Equals K
@@ -115,6 +139,7 @@ def subarray_sum(nums: list[int], k: int) -> int:
         count += seen.get(prefix - k, 0)
         seen[prefix] = seen.get(prefix, 0) + 1
     return count
+
 
 
 """
@@ -181,3 +206,18 @@ def find_max_average(nums: list[int], k: int) -> float:
         window_sum += nums[i] - nums[i - k]
         max_sum = max(max_sum, window_sum)
     return max_sum / k
+
+
+def find_max_average(nums: list[int], k: int) -> float:
+    max_avg = 0.0
+    
+    for i in range(len(nums)):
+        j = i
+        sum = 0.0
+        windpw_size = k
+        while windpw_size > 0:
+            sum +=nums[j]
+            windpw_size -= 1
+            j +=1
+        max_avg = max(max_avg, sum/k)
+    return max_avg
