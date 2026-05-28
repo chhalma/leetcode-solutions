@@ -62,6 +62,22 @@ def is_anagram(s: str, t: str) -> bool:
     return True
 
 
+#Using defaultdict
+
+def is_anagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    freq = defaultdict(int)
+    for c in s:
+        freq[c] += 1
+    for c in t:
+        if c not in freq:
+            return False
+        freq[c] -= 1
+        if freq[c] < 0:
+            return False
+    return True
+
 """
 Exercise 4 — LeetCode #49 Group Anagrams
 
@@ -114,8 +130,8 @@ def top_k_frequent(nums: list[int], k: int) -> list[int]:
     freq = Counter(nums)
     heap = []
 
-    for  n, c in freq.items():
-        heapq.heappush(heap,(c,n))
+    for  num,count in freq.items():
+        heapq.heappush(heap,(count,num))
         if len(heap) > k:
             heapq.heappop(heap)
     return [num for count,num in heap ]
@@ -199,15 +215,8 @@ nums=[1,12,-5,-6,50,3], k=4 → 12.75
 
 time: O(n)  space: O(1)
 """
-def find_max_average(nums: list[int], k: int) -> float:
-    window_sum = sum(nums[:k])
-    max_sum = window_sum
-    for i in range(k, len(nums)):
-        window_sum += nums[i] - nums[i - k]
-        max_sum = max(max_sum, window_sum)
-    return max_sum / k
 
-
+#Solution 1  , time: O(n x k) space: O(1)
 def find_max_average(nums: list[int], k: int) -> float:
     max_avg = 0.0
     
@@ -221,3 +230,13 @@ def find_max_average(nums: list[int], k: int) -> float:
             j +=1
         max_avg = max(max_avg, sum/k)
     return max_avg
+
+#solution 2
+def find_max_average(nums: list[int], k: int) -> float:
+    window_sum = sum(nums[:k])
+    max_sum = window_sum
+    for i in range(k, len(nums)):
+        window_sum += nums[i] - nums[i - k]
+        max_sum = max(max_sum, window_sum)
+    return max_sum / k
+

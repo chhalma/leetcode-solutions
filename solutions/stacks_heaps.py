@@ -101,6 +101,7 @@ nums=[1,1,1,2,2,3], k=2 → [1,2]
 
 time: O(n log k)  space: O(n)
 """
+from collections import Counter
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
     freq = Counter(nums)
     heap = []
@@ -109,3 +110,4 @@ def top_k_frequent(nums: list[int], k: int) -> list[int]:
         if len(heap) > k:
             heapq.heappop(heap)
     return [num for count, num in heap]
+

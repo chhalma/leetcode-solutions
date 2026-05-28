@@ -50,7 +50,7 @@ def cheapest_flights(n:int, flights:list[list[int]], src, dst , k:int)->int:
     for u,v,w in flights:
         graph[u].append((v,w))
 
-    heap = heapq[(0,0,src)]
+    heap = [(0,0,src)]
     
     while heap:
         for cost, stops, node in heapq.heappop(heap):
@@ -88,15 +88,15 @@ def path_minium_effort(heights:list[list[int]])->int:
         effort, r, c = heapq.heappop(heap)
         if (r,c) in visited:
             continue
-        visited.add(r,c)
+        visited.add((r,c))
         
-        if r == rows-1 and c == cols:
+        if r == rows-1 and c == cols-1:
             return effort
         
         for dr, dc in directions:
             nr,nc = r+dr, c+dc
-            if 0 <=nr<rows and c<= nc <cols and (nr,nc) not in visited:
-                new_efort = max(effort, abs(heights[r][c]-heights([nr][nc])))
-                heapq.heappush(new_efort,nr,nc)
+            if 0 <=nr<rows and 0<= nc <cols and (nr,nc) not in visited:
+                new_efort = max(effort, abs(heights[r][c]-heights[nr][nc]))
+                heapq.heappush(heap,(new_efort,nr,nc))
     return -1
     

@@ -26,8 +26,8 @@ def climbing_steps(n:int)->int:
 def climbing_optimized(n:int)->int:
      if n <= 2:
           return n
-     prev1 = 1
-     prev2 = 2
+     prev2 = 1
+     prev1 = 2
 
      for i in range(3,n+1):
           curr = prev1 +prev2

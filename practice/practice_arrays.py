@@ -10,9 +10,22 @@ nums=[-1,1,0,-3,3] → [0,0,9,0,0]
 time: O(n)  space: O(1)
 """
 def product_except_self(nums: list[int]) -> list[int]:
-    pass
+    prod_left = []
+    prod_right = []
+    p_l = 1
+    p_r = 1
 
+    for i in range(len(nums)):
+        prod_left.append(p_l)
+        p_l *= nums[i]
 
+    for i in range(len(nums) - 1, -1, -1):
+        prod_right.append(p_r)
+        p_r *= nums[i]
+
+    prod_right.reverse()
+    return [prod_left[i] * prod_right[i] for i in range(len(nums))]
+   
 """
 Exercise 2 — LeetCode #11 Container With Most Water
 
@@ -25,7 +38,17 @@ height=[1,1] → 1
 time: O(n)  space: O(1)
 """
 def max_area(height: list[int]) -> int:
-    pass
+    left, right = 0, len(height)-1
+    max_area = 0
+
+    while left<right:
+        area = min(height[left],height[right]) * (right-left)
+        max_area = max(max_area, area)
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1 
+
 
 
 """
@@ -39,7 +62,20 @@ height=[4,2,0,3,2,5]              → 9
 time: O(n)  space: O(1)
 """
 def trap(height: list[int]) -> int:
-    pass
+    total_rain = 0
+    
+    while height[left] == 0:
+        left += 1
+        right +=1
+        while height[right] == 0:
+            right += 1
+
+        rain_drop = min(height[left],height[right])*(right-left)
+        total_rain += rain_drop
+        left = right
+        right +=1
+    return total_rain
+
 
 
 """

@@ -10,7 +10,13 @@ nums=[7,7,7,7]              → 1
 time: O(n²)  space: O(n)
 """
 def length_of_lis(nums: list[int]) -> int:
-    pass
+    dp = [1] * len(nums)
+    for i in range(1,len(nums)):
+        for j in range(i):
+            if nums[i] > nums[j]:
+                dp[i] = max(dp[i],dp[j]+1)
+    return max(dp)
+
 
 
 """
