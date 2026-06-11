@@ -32,8 +32,16 @@ s="catsandog", wordDict=["cats","dog","sand"] → False
 time: O(n²)  space: O(n)
 """
 def word_break(s: str, wordDict: list[str]) -> bool:
-    pass
+    word = set(wordDict)
+    dp = [False] * (len(s)+1)
+    dp[0] = True
 
+    for i in range(1,len(s)+1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word:
+                dp[i] = True
+                break
+    return dp[len(s)]
 
 """
 Exercise 3 — LeetCode #416 Partition Equal Subset Sum

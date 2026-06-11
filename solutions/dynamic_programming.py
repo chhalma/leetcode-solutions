@@ -31,9 +31,9 @@ def climbing_optimized(n:int)->int:
 
      for i in range(3,n+1):
           curr = prev1 +prev2
-          prev1 = prev2
-          prev2 = curr
-     return prev2
+          prev2 = prev1
+          prev1 = curr
+     return prev1
 
 """
 Exercise 2 — LeetCode #198 House Robber

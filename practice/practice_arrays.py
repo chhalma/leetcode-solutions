@@ -61,21 +61,22 @@ height=[4,2,0,3,2,5]              → 9
 
 time: O(n)  space: O(1)
 """
-def trap(height: list[int]) -> int:
-    total_rain = 0
-    
-    while height[left] == 0:
-        left += 1
-        right +=1
-        while height[right] == 0:
-            right += 1
+def trap(height):
+    left, right = 0, len(height)-1
+    max_left, max_right = 0, 0
+    total = 0
 
-        rain_drop = min(height[left],height[right])*(right-left)
-        total_rain += rain_drop
-        left = right
-        right +=1
-    return total_rain
+    while left < right:
+        if height[left] <= height[right]:
+            max_left = max(max_left, height[left])
+            total += max_left - height[left]
+            left += 1
+        else:
+            max_right = max(max_right, height[right])
+            total += max_right - height[right]
+            right -= 1
 
+    return total
 
 
 """
@@ -90,4 +91,8 @@ s="a", t="aa"              → ""
 time: O(n)  space: O(n)
 """
 def min_window(s: str, t: str) -> str:
-    pass
+    if len(s) < len(t):
+        return 
+    res = ""
+    for c in s:
+        
