@@ -109,21 +109,53 @@ Return the maximum depth of a binary tree.
   v3. BFS level order   — O(n) time  O(n) space  [count levels with a queue]
 """
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
+    def __init__(self, val = 0, left = None, right = None):
         self.val = val
         self.left = left
-        self.right = right
+        self.right =  right
 
 def max_depth_v1(root: TreeNode) -> int:
-    pass
+    if not root:
+        return 0
+    
+    return 1 + max(max_depth_v1(root.left), max_depth_v1(root.right))
 
 def max_depth_v2(root: TreeNode) -> int:
-    pass
+    if not root:
+        return 0
+    
+    stack = [(root, 1)]
+    max_depth = 0
 
+    while stack:
+        node,depth = stack.pop()
+        max_depth = max(max_depth, depth)
+
+        if node.left :
+            stack.append(node.left, depth+1)
+        if node.right :
+            stack.append(node.right, depth+1)
+
+    return max_depth
+
+from collections import deque
 def max_depth_v3(root: TreeNode) -> int:
-    pass
+    if not root:
+        return 0
+    queue = deque([(root,1)])
+    max_depth = 0
 
+    while queue:
+        node, depth = queue.popleft()
 
+        max_depth = max(max_depth,depth)
+
+        if node.left:
+            queue.append((node.left,depth+1))
+        if node.right:
+            queue.append((node.right,depth+1))
+
+    return max_depth
 """
 Day 4 — LeetCode #200 Number of Islands
 
