@@ -171,14 +171,81 @@ grid=[["1","1","0","0","0"],
   v2. DFS iterative     — O(m×n) time  O(m×n) space  [explicit stack]
   v3. BFS               — O(m×n) time  O(m×n) space  [queue, spreads level by level]
 """
+
+
 def num_islands_v1(grid: list[list[str]]) -> int:
-    pass
+    if not grid:
+        return 0
+    rows = len(grid)
+    cols = len(grid[0])
+    count = 0
+    def dfs(r,c):
+        if r < 0 or r >= rows or c<0 or c >= cols or grid[r][c] != '1':
+            return 
+        grid[r][c] = '0'
+        dfs(r, c+1)
+        dfs(r,c-1)
+        dfs(r+1,c)
+        dfs(r-1,c)
+
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                count += 1
+                dfs(r,c)
+    return count
+                
 
 def num_islands_v2(grid: list[list[str]]) -> int:
-    pass
+    if not grid:
+        return 0
+    
+    count = 0
+    rows = len(grid)
+    cols = len(grid[0])
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                count += 1
+                stack = [(r,c)]
+                while stack:
+                    row,col =  stack.pop()
+                    if row < 0 or row>= rows or col <0 or col>=cols or grid[row][col] !='1':
+                        continue
+                    grid[row][col] = '0'
+                    stack.append((row,col+1))
+                    stack.append((row,col-1))
+                    stack.append((row+1,col))
+                    stack.append((row-1,col))
+    return count
 
 def num_islands_v3(grid: list[list[str]]) -> int:
-    pass
+    if not grid :
+        return 0
+    
+    rows = len(grid)
+    cols = len(grid[0])
+
+    count = 0
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                count += 1
+
+                queue = deque([(r,c)])
+                while queue:
+                    row, col =  queue.popleft()
+                    if row < 0 or row>= rows or col <0 or col>=cols or grid[row][col] !='1':
+                        continue
+                    grid[row][col] = '0'
+                    queue.append((row,col+1))
+                    queue.append((row,col-1))
+                    queue.append((row+1,col))
+                    queue.append((row-1,col))
+    return count
 
 
 """
