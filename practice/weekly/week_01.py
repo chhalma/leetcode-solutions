@@ -263,13 +263,43 @@ n=5 → 8
   v3. Recursion + memo  — O(n) time  O(n) space   [top-down with cache]
 """
 def climb_stairs_v1(n: int) -> int:
-    pass
+    dp = [0]*(n+1)
+    dp[1] = 1
+    dp[2] = 2
+    if n<= 2:
+        return n
+    
+    for i in range(3,n+1):
+        dp[i] = dp[i-1]+dp[i-2]
+
+    return dp[n]
+
 
 def climb_stairs_v2(n: int) -> int:
-    pass
+    
+    if n<=2:
+        return n
+    
+    prev1 = 2
+    prev2 = 1 
+
+    result = 0
+    for i in range(3, n+1):
+        result = prev1 + prev2
+        prev2 = prev1
+        prev1 = result
+    return result
 
 def climb_stairs_v3(n: int) -> int:
-    pass
+    memo = {}
+    def helper(n):
+        if n <= 2:
+            return n
+        if n in memo:
+            return memo[n]
+        memo[n] = helper(n-1) + helper(n-2)
+        return memo[n]
+    return helper(n)
 
 
 """
