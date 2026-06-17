@@ -301,6 +301,14 @@ def climb_stairs_v3(n: int) -> int:
         return memo[n]
     return helper(n)
 
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def climb_stairs_v3_memo(n: int) -> int:
+    if n <= 2:
+        return n
+    return climb_stairs_v3(n-1) + climb_stairs_v3(n-2)
+
 
 """
 Day 6 — LeetCode #21 Merge Two Sorted Lists
@@ -320,13 +328,55 @@ class ListNode:
         self.next = next
 
 def merge_two_lists_v1(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+    dummy = ListNode(0)
+    curr = dummy
+
+    while l1 and l2:
+        if l1.val < l2.val:
+            curr.next = l1
+            l1 = l1.next
+        else:
+            curr.next = l2
+            l2 = l2.next
+        curr = curr.next
+    curr.next = l1 or l2
+
+    return dummy.next
+
+
 
 def merge_two_lists_v2(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+    if not l1: return l2
+    if not l2: return l1
+
+    if l1.val < l2.val:
+        l1.next = merge_two_lists_v2(l1.next, l2)
+        return l1
+    else:
+        l2.next = merge_two_lists_v2(l1, l2.next)
+        return l2
+
 
 def merge_two_lists_v3(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+    if not l1: return l2
+    if not l2: return l1
+    if l1.val <= l2.val:
+        head = l1
+        l1 = l1.next
+    else:
+        head = l2
+        l2 = l2.next
+    curr = head
+    while l1 and l2:
+        if l1.val <= l2.val:
+            curr.next = l1
+            l1 = l1.next
+        else:
+            curr.next = l2
+            l2 = l2.next
+        curr = curr.next
+    curr.next = l1 or l2
+    return head
 
 
 """
