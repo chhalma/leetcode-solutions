@@ -393,11 +393,41 @@ prices=[7,6,4,3,1]   → 0  (no profit possible)
   v2. One pass min track— O(n) time  O(1) space   [same idea, written differently]
   v3. Brute force       — O(n²) time O(1) space   [every pair, know why it's slow]
 """
+
 def max_profit_v1(prices: list[int]) -> int:
-    pass
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        if price < min_price:
+            min_price = price
+        else:
+            profit = price - min_price
+            max_profit = max(profit, max_profit)
+
+    return max_profit
 
 def max_profit_v2(prices: list[int]) -> int:
-    pass
+    left,right = 0,1
+    max_profit = 0
+
+    while right < len(prices):
+        if prices[left] < prices[right]:
+            profit = prices[right] - prices[left]
+            max_profit = max(profit, max_profit)
+        else:
+            left = right
+        right += 1
+    return max_profit
 
 def max_profit_v3(prices: list[int]) -> int:
-    pass
+    
+    max_profit = 0
+    for i,price in enumerate(prices):
+        for j in range(i+1, len(prices)):
+            if price < prices[j]: 
+                profit = prices[j] - price
+                if profit > max_profit:
+                    max_profit = profit
+                    buy_sell = {(i,j),max_profit}
+    return max_profit
