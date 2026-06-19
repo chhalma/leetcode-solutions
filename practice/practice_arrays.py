@@ -90,9 +90,35 @@ s="a", t="aa"              → ""
 
 time: O(n)  space: O(n)
 """
+from collections import Counter
+
 def min_window(s: str, t: str) -> str:
     if len(s) < len(t):
         return 
-    res = ""
-    for c in s:
+    
+    need = Counter(t)
+    window = {}
+    have, required = 0, len(need)
+    left = 0
+    result = ""
+
+    for right in range(len(s)):
+        c =  s[right]
+        window[c] =  window.get(c,0) + 1
+        if c in need and window[c] == need[c]:
+            have += 1
+        while have == required:
+            cur = s[left:right+1]
+            if result == "" or len(cur) < len(result):
+                result = cur
+
+            window[s[left]] -= 1
+            if s[left] in need and window[s[left]] <need[s[left]]:
+                have -= 1
+            left += 1
+
+    return result
+
+        
+
         
