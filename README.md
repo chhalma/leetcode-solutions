@@ -6,14 +6,14 @@ Python solutions for common algorithm and data structure problems, organised by 
 
 | File | Problems |
 |------|----------|
-| [arrays_strings.py](solutions/arrays_strings.py) | #217 Contains Duplicate, #1 Two Sum, #242 Valid Anagram, #49 Group Anagrams, #347 Top K Frequent, #560 Subarray Sum, #125 Valid Palindrome, #3 Longest Substring, #643 Max Average Subarray |
-| [binary_search.py](solutions/binary_search.py) | #704 Binary Search, #35 Search Insert Position, #153 Find Minimum Rotated Array, #56 Merge Intervals |
-| [trees.py](solutions/trees.py) | #104 Max Depth, #94 Inorder Traversal, #100 Same Tree, #102 Level Order Traversal |
-| [graphs.py](solutions/graphs.py) | #200 Number of Islands, Graph DFS, Graph BFS, Has Path |
-| [stacks_heaps.py](solutions/stacks_heaps.py) | #20 Valid Parentheses, #155 Min Stack, #703 Kth Largest, #347 Top K Frequent (heap) |
-| [dynamic_programming.py](solutions/dynamic_programming.py) | #70 Climbing Stairs, #198 House Robber, #1143 LCS, #322 Coin Change |
-| [linked_lists.py](solutions/linked_lists.py) | #206 Reverse Linked List, #21 Merge Two Sorted Lists, #141 Linked List Cycle, #876 Middle of Linked List, #19 Remove Nth From End |
-| [dijkstra_graph.py](solutions/dijkstra_graph.py) | #743 Network Delay Time, #787 Cheapest Flights Within K Stops, #1631 Path With Minimum Effort |
+| [arrays_strings.py](fundamentals/arrays_strings.py) | #217 Contains Duplicate, #1 Two Sum, #242 Valid Anagram, #49 Group Anagrams, #347 Top K Frequent, #560 Subarray Sum, #125 Valid Palindrome, #3 Longest Substring, #643 Max Average Subarray |
+| [binary_search.py](fundamentals/binary_search.py) | #704 Binary Search, #35 Search Insert Position, #153 Find Minimum Rotated Array, #56 Merge Intervals |
+| [trees.py](fundamentals/trees.py) | #104 Max Depth, #94 Inorder Traversal, #100 Same Tree, #102 Level Order Traversal |
+| [graphs.py](fundamentals/graphs.py) | #200 Number of Islands, Graph DFS, Graph BFS, Has Path |
+| [stacks_heaps.py](fundamentals/stacks_heaps.py) | #20 Valid Parentheses, #155 Min Stack, #703 Kth Largest, #347 Top K Frequent (heap) |
+| [dynamic_programming.py](fundamentals/dynamic_programming.py) | #70 Climbing Stairs, #198 House Robber, #1143 LCS, #322 Coin Change |
+| [linked_lists.py](fundamentals/linked_lists.py) | #206 Reverse Linked List, #21 Merge Two Sorted Lists, #141 Linked List Cycle, #876 Middle of Linked List, #19 Remove Nth From End |
+| [dijkstra_graph.py](fundamentals/dijkstra_graph.py) | #743 Network Delay Time, #787 Cheapest Flights Within K Stops, #1631 Path With Minimum Effort |
 
 ## Revision Notes
 
