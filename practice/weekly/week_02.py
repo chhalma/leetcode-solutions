@@ -14,11 +14,27 @@ nums=[11,13,15,17]  → 11
   v2. Linear scan       — O(n) time      O(1) space  [brute force, know why it's slow]
 """
 def find_min_v1(nums: list[int]) -> int:
-    pass
+    left = 0 
+    right = len(nums)-1
+
+    while left < right:
+        mid = (left+right)//2
+        val = nums[mid]
+        if val > nums[right]:
+            left = mid+1
+        else:
+            right = mid
+
+    return nums[left]
 
 def find_min_v2(nums: list[int]) -> int:
-    pass
-
+    
+    for i in range(len(nums)):
+       if nums[i+1] < nums[i]:
+           return nums[i+1]
+       else:
+           return nums[i]
+       
 
 """
 Day 2 — LeetCode #226 Invert Binary Tree
