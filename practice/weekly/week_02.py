@@ -29,7 +29,7 @@ def find_min_v1(nums: list[int]) -> int:
 
 def find_min_v2(nums: list[int]) -> int:
     
-    for i in range(len(nums)):
+    for i in range(len(nums)-1):
        if nums[i+1] < nums[i]:
            return nums[i+1]
        else:
@@ -59,13 +59,51 @@ class TreeNode:
         self.right = right
 
 def invert_tree_v1(root: TreeNode) -> TreeNode:
-    pass
+    if not root:
+        return
+    root.left, root.right =  root.right, root.left
+    invert_tree_v1(root.left)
+    invert_tree_v1(root.right)
+    return root
 
+from collections import deque 
 def invert_tree_v2(root: TreeNode) -> TreeNode:
-    pass
+     
+     if not root:
+         return None
+     queue = deque([root])
+
+     while queue:
+         node =  queue.popleft()
+             
+         left = node.left
+         node.left =  node.right
+         node.right = left
+         if node.left != None:
+            queue.append(node.left)
+         if node.right != None:
+            queue.append(node.right)
+     return root
+
+    
 
 def invert_tree_v3(root: TreeNode) -> TreeNode:
-    pass
+    if not root:
+        return
+    
+    stack = [root]
+
+    while stack:
+        node = stack.pop()
+        left = node.left
+        node.left =  node.right
+        node.right = left
+        if node.left != None:
+            stack.append(node.left)
+        if node.right != None:
+            stack.append(node.right)
+    return root
+
 
 
 """
@@ -85,11 +123,33 @@ The path may or may not pass through the root.
   v2. DFS return tuple   — O(n) time  O(h) space  [return (depth, diameter) pair]
 """
 def diameter_of_binary_tree_v1(root: TreeNode) -> int:
-    pass
+    diameter = 0
 
+    def depth(node):
+        nonlocal diameter
+        if not node:
+            return 0
+        left = depth(node.left)
+        right = depth(node.right)
+
+        diameter = max(diameter, left+right)
+        return 1+ max(left,right)
+
+    depth(root)
+    return diameter
+    
 def diameter_of_binary_tree_v2(root: TreeNode) -> int:
-    pass
+    def depth(node):
+        if not node:
+            return (0,0)
+        left_dpth, left_dia =  depth(node.left)
+        right_dpth, right_dia = depth(node.right)
+        cur_dia = left_dpth+right_dpth
+        max_dia = max(cur_dia, left_dia,right_dia)
 
+        return (1+max(left_dpth,right_dpth), max_dia)
+        
+    return depth(root)[1]
 
 """
 Day 4 — LeetCode #322 Coin Change
@@ -107,10 +167,39 @@ coins=[2],      amount=3  → -1
   v3. BFS               — O(amount × coins) time  O(amount) space  [treat as shortest path]
 """
 def coin_change_v1(coins: list[int], amount: int) -> int:
-    pass
+    
+    dp = [float('inf')]*(amount+1)
+    dp[0] = 0
+    
+    for i in range(1, amount+1):
+        for coin in coins:
+            if coin <= i:
+                dp[i] = min(dp[i], dp[i-coin]+1)
+    return dp[amount] if dp[amount] != float('inf') else -1
+
 
 def coin_change_v2(coins: list[int], amount: int) -> int:
-    pass
+    
+    memo = {}
+    def helper(remaining):
+        if remaining == 0:
+            return 0
+        if remaining < 0 :
+            return -1
+        if remaining in memo:
+            return memo[remaining]
+        
+        min_coin = float('inf')
+        for coin in coins:
+            result = helper(remaining-coin)
+            if result != -1:
+                min_coin = min(min_coin,result+1)
+
+        memo[remaining] =  min_coin if min_coin != float('inf') else -1
+        return memo[remaining]
+
+    return helper(amount)
+
 
 def coin_change_v3(coins: list[int], amount: int) -> int:
     pass
