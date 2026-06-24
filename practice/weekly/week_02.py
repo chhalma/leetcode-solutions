@@ -200,10 +200,24 @@ def coin_change_v2(coins: list[int], amount: int) -> int:
 
     return helper(amount)
 
-
+from collections import deque
 def coin_change_v3(coins: list[int], amount: int) -> int:
-    pass
+    queue = deque([amount])
+    visited = {amount}
+    step = 0
 
+    while queue:
+        step += 1
+        for _ in range(len(queue)):
+            curr = queue.popleft()
+            for coin in coins:
+                remaining =  curr - coin
+                if remaining == 0:
+                    return step
+                if remaining>0 and remaining not in visited:
+                    visited.add(remaining)
+                    queue.append(remaining)
+    return -1
 
 """
 Day 5 — LeetCode #3 Longest Substring Without Repeating Characters
@@ -219,7 +233,26 @@ s="pwwkew"   → 3  ("wke")
   v2. Sliding window + dict  — O(n) time  O(n) space  [jump left pointer directly]
 """
 def length_of_longest_substring_v1(s: str) -> int:
-    pass
+    left =0 
+    seen = set()
+    max_len = 0
+    for right in range(len(s)):
+        while s[right] in seen:
+            seen.remove(s[left])
+            left +=1
+        seen.add(s[right])
+        max_len = max(max_len, right-left+1)
+    return max_len
 
 def length_of_longest_substring_v2(s: str) -> int:
-    pass
+    max_len = 0
+    left =0
+    seen = {}
+
+    for right in range(len(s)):
+        if s[right] in seen and seen[s[right]] >= left:
+            left = seen[s[right]+1]
+        seen[s[right]] = right
+        max_len = max(max_len, right-left+1)
+    return max_len
+
