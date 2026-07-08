@@ -190,6 +190,7 @@ def diameter_of_binary_tree(root: TreeNode) -> int:
         dia = max(dia, left+right)
 
         return 1 + max(left, right)
+    
     depth(root)
     return dia
 """
@@ -205,9 +206,27 @@ Must buy before you sell.
 prices=[7,1,5,3,6,4] → 5
 prices=[7,6,4,3,1]   → 0
 """
-def max_profit(prices: list[int]) -> int:
-    pass
 
+def max_profit(prices: list[int]) -> int:
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_price = min(price,min_price)
+        profit =  price-min_price
+        max_profit = max(max_profit,profit)
+    return max_profit
+
+def max_profit(prices:list[int]) ->int:
+    left = 0
+    max_profit= 0
+    for right in range(1, len(prices)):
+        if prices[right] > prices[left]:
+            profit =  prices[right] - prices[left]
+            max_profit = max(profit, max_profit)     
+        else:
+            left = right
+    return max_profit       
 
 """
 #226 Invert Binary Tree  [Medium]
@@ -219,7 +238,14 @@ Invert a binary tree (mirror it).
   2   7    →     7   2
 """
 def invert_tree(root: TreeNode) -> TreeNode:
-    pass
+    
+   if not root:
+       return None
+   
+   root.left, root.right = root.right, root.left
+   invert_tree(root.left)
+   invert_tree(root.right)
+   return root
 
 
 """
