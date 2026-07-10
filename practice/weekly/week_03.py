@@ -313,4 +313,15 @@ s="bbbbb"    → 1
 s="pwwkew"   → 3
 """
 def length_of_longest_substring(s: str) -> int:
-    pass
+    longest = 0
+    seen = set()
+    left = 0
+    for right, c in enumerate(s):
+        while c in seen:
+            seen.remove(s[left])
+            left += 1
+
+        seen.add(c)
+        longest =  max(longest, right-left +1)
+
+    return longest
