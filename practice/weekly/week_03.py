@@ -265,7 +265,12 @@ Return the maximum depth of a binary tree.
 → 3
 """
 def max_depth(root: TreeNode) -> int:
-    pass
+    if not root:
+        return 0
+        
+    return 1+ max(max_depth(root.left),max_depth(root.right))    
+    
+
 
 
 """
@@ -281,7 +286,21 @@ class ListNode:
         self.next = next
 
 def merge_two_lists(l1: ListNode, l2: ListNode) -> ListNode:
-    pass
+    dummy = ListNode(0)
+    curr =  dummy
+
+    while l1 and l2:
+        if l1.val < l2.val:
+            curr.next = l1
+            l1 = l1.next
+        else:
+            curr.next = l2
+            l2 = l2.next
+        curr =  curr.next
+    
+    curr.next = l1 or l2
+    return dummy.next
+
 
 
 """
