@@ -74,10 +74,25 @@ p=2, q=4 → 2
   v2. Iterative  — O(h) time  O(1) space  [walk down the tree]
 """
 def lca_bst_v1(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-    pass
+    
+    if p.val < root.val and q.val < root.val:
+        root =  root.left
+        return lca_bst_v1(root,p,q)
+
+    elif p.val > root.val and q.val > root.val:
+        root =  root.right
+        return lca_bst_v1(root,p,q)
+    else: return root
 
 def lca_bst_v2(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
-    pass
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root =  root.left
+        elif p.val > root.val and q.val > root.val:
+            root =  root.right
+        else: return root 
+            
+    
 
 
 """
