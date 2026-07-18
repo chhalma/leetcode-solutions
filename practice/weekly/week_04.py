@@ -190,11 +190,9 @@ def can_finish_v1(numCourses: int, prerequisites: list[list[int]]) -> bool:
 def can_finish_v2(numCourses: int, prerequisites: list[list[int]]) -> bool:
     graph = {i:[] for i in range(numCourses)}
 
-    for a,b in prerequisites:
-        graph[a].append(b)
-
     in_degree = [0]*numCourses
     for a,b in prerequisites:
+        graph[b].append(a)
         in_degree[a] += 1
 
     queue = deque()
