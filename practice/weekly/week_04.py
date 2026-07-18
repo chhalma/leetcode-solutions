@@ -1,5 +1,6 @@
 """Week 4 — Daily Practice"""
 
+
 """
 Day 1 — LeetCode #572 Subtree of Another Tree
 
@@ -113,11 +114,43 @@ Return the level-order traversal of a binary tree's values
   v1. BFS with queue   — O(n) time  O(n) space  [deque, process level by level]
   v2. DFS recursive    — O(n) time  O(n) space  [pass level index, build result]
 """
+from collections import deque
+
 def level_order_v1(root: TreeNode) -> list[list[int]]:
-    pass
+    if not root:
+        return []
+    
+    queue = deque([root])
+    result = []
+
+    while queue:
+        level = []
+        for _ in range(len(queue)):
+            node =  queue.popleft()
+            level.append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        result.append(level)
+    return result
+
 
 def level_order_v2(root: TreeNode) -> list[list[int]]:
-    pass
+    result = []
+
+    def dfs(node, level):
+        if not node:
+            return
+        if len(result) == level:
+            result.append([])
+        result[level].append(node.val)
+        dfs(node.left, level+1)
+        dfs(node.right, level+1)
+    
+    dfs(root, 0)
+    return result
+
 
 
 """
@@ -134,10 +167,51 @@ n=2, prerequisites=[[1,0],[0,1]]  → False (cycle)
   v2. BFS topological sort — O(V+E) time  O(V+E) space  [Kahn's algorithm, in-degree]
 """
 def can_finish_v1(numCourses: int, prerequisites: list[list[int]]) -> bool:
-    pass
+    graph = {i: [] for i in range(numCourses)}
+    for a,b in prerequisites:
+        graph[a].append(b)
 
+    state = [0] * numCourses
+
+    def dfs(course):
+        if state[course] == 1: return False
+        if state[course] == 2: return True
+        state[course] = 1
+
+        for prereq in graph[course]:
+            if not dfs(prereq): return False
+
+        state[course] = 2
+        return True
+    
+    for i in range(numCourses):
+        if not dfs(i): return False
+    return True
 def can_finish_v2(numCourses: int, prerequisites: list[list[int]]) -> bool:
-    pass
+    graph = {i:[] for i in range(numCourses)}
+
+    for a,b in prerequisites:
+        graph[a].append(b)
+
+    in_degree = [0]*numCourses
+    for a,b in prerequisites:
+        in_degree[a] += 1
+
+    queue = deque()
+
+    for i in range(numCourses):
+        if in_degree[i] == 0:
+            queue.append(i)
+    taken = 0
+    while queue:
+        course = queue.popleft()
+        taken += 1
+        for neighbor in graph[course]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return taken == numCourses
 
 
 """
