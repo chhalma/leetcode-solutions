@@ -225,7 +225,22 @@ nums=[0,1]   → [[0,1],[1,0]]
   v2. Built-in itertools  — O(n×n!) time  O(n×n!) space [know it exists, explain tradeoffs]
 """
 def permute_v1(nums: list[int]) -> list[list[int]]:
-    pass
+    results = []
+
+    def backtrack(current, remaining):
+        if not remaining:
+            results.append(current[:])
+            return 
+
+        for i in range(len(remaining)):
+            current.append(remaining[i])
+            backtrack(current,remaining[:i]+remaining[i+1:])
+            current.pop() 
+
+    backtrack([],nums)
+    return results  
+
+from itertools import permutations
 
 def permute_v2(nums: list[int]) -> list[list[int]]:
-    pass
+    return [list(p) for p in permutations(nums)]
